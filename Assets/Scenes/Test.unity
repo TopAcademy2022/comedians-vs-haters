@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 417056078}
   - component: {fileID: 417056082}
   - component: {fileID: 417056083}
+  - component: {fileID: 417056084}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -364,6 +365,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxMoveSpeed: 100
+--- !u!114 &417056084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417056077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158a71006a4511a4bb7991e713fb8d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 346426420}
+  mouseSensitivity: 3
 --- !u!1 &1542299728
 GameObject:
   m_ObjectHideFlags: 0

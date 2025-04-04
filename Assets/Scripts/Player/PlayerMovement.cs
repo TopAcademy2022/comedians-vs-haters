@@ -43,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
 				Vector2 inputVector = moveAction.ReadValue<Vector2>();
 				Vector3 moveDirection = new Vector3(inputVector.x, 0f, inputVector.y).normalized;
 
+				// TODO: Use rotation
 				rb.AddForce(moveDirection * moveSpeed, ForceMode.Acceleration);
 			}
 		}
