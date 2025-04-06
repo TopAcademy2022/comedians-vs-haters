@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class FPSPlayerMovement : MonoBehaviour
 {
 	private float moveSpeed = 10.0f;
 
@@ -40,17 +40,13 @@ public class PlayerMovement : MonoBehaviour
 		{
 			if (moveAction.IsPressed())
 			{
-				Vector2 inputVector = moveAction.ReadValue<Vector2>();
-				Vector3 moveDirection = new Vector3(inputVector.x, 0f, inputVector.y).normalized;
-
-				// TODO: Use rotation
-				rb.AddForce(moveDirection * moveSpeed, ForceMode.Acceleration);
+				rb.AddForce(this.rb.transform.forward * moveSpeed, ForceMode.Acceleration);
 			}
 		}
 		// TODO: use jumpAction.trigerred
 		if (this.jumpAction.IsPressed() && this.IsGrounded())
 		{
-			this.rb.AddForce(this.transform.up * jumpPower, ForceMode.Impulse);
+			this.rb.AddForce(this.rb.transform.up * jumpPower, ForceMode.Impulse);
 		}
 	}
 }

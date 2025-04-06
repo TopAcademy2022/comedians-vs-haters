@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,11 +16,15 @@ public class CameraRotation : MonoBehaviour
 
 	private float yRotation = 0f;
 
+	private float yMinRotation = -45f;
+
+	private float yMaxRotation = 45f;
+
 	private void Start()
 	{
 		this._rotateAction = InputSystem.actions.FindAction("Look");
 		this.rb = GetComponent<Rigidbody>();
-		Cursor.lockState = CursorLockMode.Locked;
+		//Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	private void FixedUpdate()
@@ -31,6 +36,8 @@ public class CameraRotation : MonoBehaviour
 
 		xRotation += mouseX;
 		yRotation -= mouseY;
+
+		yRotation = Math.Clamp(yRotation, yMinRotation, yMaxRotation);
 
 		this.rb.transform.localRotation = Quaternion.Euler(0f, xRotation, 0f);
 		this.Camera.transform.localRotation = Quaternion.Euler(yRotation, 0f, 0f);
