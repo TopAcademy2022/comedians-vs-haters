@@ -3,32 +3,29 @@ using UnityEngine.InputSystem;
 
 public class RTSPlayerMovement : MonoBehaviour
 {
-	private Camera _camera;
-
 	private float _moveSpeed;
 
 	private float _jumpPower;
 
     private Rigidbody _rigidbody;
 
-	private InputAction _mouseAction;
-
 	private InputAction _jumpAction;
 
-	private Vector3 _destinationPoint;
+	private Vector3? _destinationPoint;
+
+	private float _stopDistance;
 
 	public RTSPlayerMovement()
 	{
 		this._moveSpeed = 10.0f;
 		this._jumpPower = 5.0f;
-		this._destinationPoint = Vector3.zero;
+		this._destinationPoint = null;
+		this._stopDistance = 5.0f;
 	}
 
 	private void Awake()
 	{
-		this._camera = GetComponent<Camera>();
 		this._rigidbody = GetComponent<Rigidbody>();
-		this._mouseAction = InputSystem.actions.FindAction("Attack");
 		this._jumpAction = InputSystem.actions.FindAction("Jump");
 	}
 
@@ -39,13 +36,18 @@ public class RTSPlayerMovement : MonoBehaviour
 
 	private void MoveOnPoint()
 	{
-		if (this._destinationPoint != Vector3.zero)
+		if (this._destinationPoint.HasValue)
 		{
-			// TODO: Use radius, and movespeed / 2
-			if (this._rigidbody.transform.position != this._destinationPoint)
+			Vector3 different = this._destinationPoint.Value - transform.position;
+			
+			if (different.magnitude > this._stopDistance)
 			{
-				Vector3 different = this._rigidbody.transform.position - this._destinationPoint;
-				this._rigidbody.AddForce(different.normalized * -1 * this._moveSpeed, ForceMode.Acceleration);
+				this._rigidbody.AddForce(different.normalized * this._moveSpeed, ForceMode.Acceleration);
+			}
+			else
+			{
+				this._rigidbody.linearVelocity = Vector3.zero;
+				this._destinationPoint = null;
 			}
 		}
 	}
@@ -54,9 +56,8 @@ public class RTSPlayerMovement : MonoBehaviour
 	{
 		this.MoveOnPoint();
 
-		if (this._mouseAction.IsPressed())
+		if (Mouse.current.leftButton.wasPressedThisFrame)
 		{
-			// TODO: rewrite
 			Vector2 mouseClickPosition = Mouse.current.position.ReadValue();
 
 			Ray cameraRay = Camera.main.ScreenPointToRay(mouseClickPosition);
@@ -64,10 +65,7 @@ public class RTSPlayerMovement : MonoBehaviour
 
 			if (Physics.Raycast(cameraRay, out rayInfo))
 			{
-				// this._destinationPoint = rayInfo.point;
-				this._destinationPoint = new Vector3(10f, 1f, 10f);
-
-				Debug.Log("Mouse clicked at: " + this._destinationPoint);
+				this._destinationPoint = rayInfo.point;
 			}
 		}
 		// TODO: use jumpAction.trigerred
