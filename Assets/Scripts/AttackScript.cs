@@ -6,19 +6,20 @@ public class AttackScript : MonoBehaviour
 
 	public AttackScript()
 	{
-		this._damage = 110.0f;
+		this._damage = 10.0f;
 	}
 
-	private void OnTriggerEnter(Collider other)
+	private void OnCollisionStay(Collision collisionInfo)
 	{
-		if (other.CompareTag("Player"))
-		{
-			HPSystem playerHealth = other.GetComponent<HPSystem>();
+		Debug.Log("YES!");
+		//if (other.CompareTag("Player"))
+		//{
+		//	HPSystem playerHealth = other.GetComponent<HPSystem>();
 
-			if (playerHealth != null)
-			{
-				playerHealth.GetDamage(this._damage);
-			}
-		}
+		//	if (playerHealth != null)
+		//	{
+		//		playerHealth.GetDamage(this._damage);
+		//	}
+		//}
 	}
 }

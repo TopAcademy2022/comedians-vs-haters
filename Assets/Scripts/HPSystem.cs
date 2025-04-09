@@ -12,11 +12,21 @@ public class HPSystem : MonoBehaviour
 		this._minHp = 0.0f;
 	}
 
+	public float GetMinHp()
+	{
+		return this._minHp;
+	}
+
+	public float GetCurrentHp()
+	{
+		return this._currentHp;
+	}
+
 	public void GetDamage(float damage)
 	{
 		this._currentHp -= damage;
 
-		if (this._currentHp < this._minHp)
+		if (this._currentHp <= this._minHp)
 		{
 			Destroy(this.gameObject);
 		}
