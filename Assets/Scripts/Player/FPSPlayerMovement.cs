@@ -15,17 +15,39 @@ public class FPSPlayerMovement : MonoBehaviour
 
 	private InputAction jumpAction;
 
-	private void Awake()
+    private bool IsGrounded()
+    {
+        return this.rb.linearVelocity.y == 0;
+    }
+
+	private void Jump()
+	{
+        if (this.IsGrounded())
+        {
+            this.rb.AddForce(this.rb.transform.up * jumpPower, ForceMode.Impulse);
+        }
+    }
+
+    private void OnEnable()
+	{
+		this.jumpAction.Enable();
+        this.moveAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        this.jumpAction.Disable();
+        this.moveAction.Disable();
+    }
+
+    private void Awake()
 	{
 		this.rb = GetComponent<Rigidbody>();
 		this.moveAction = InputSystem.actions.FindAction("Move");
 		this.jumpAction = InputSystem.actions.FindAction("Jump");
-	}
 
-	bool IsGrounded()
-	{
-		return this.rb.linearVelocity.y == 0;
-	}
+		this.jumpAction.performed += ievent => Jump();
+    }
 
 	private void FixedUpdate()
 	{
@@ -40,13 +62,11 @@ public class FPSPlayerMovement : MonoBehaviour
 		{
 			if (moveAction.IsPressed())
 			{
-				rb.AddForce(this.rb.transform.forward * moveSpeed, ForceMode.Acceleration);
+                Vector2 input = moveAction.ReadValue<Vector2>();
+                Vector3 direction = transform.forward * input.y + transform.right * input.x;
+                
+				rb.AddForce(direction.normalized * moveSpeed, ForceMode.Acceleration);
 			}
-		}
-		// TODO: use jumpAction.trigerred
-		if (this.jumpAction.IsPressed() && this.IsGrounded())
-		{
-			this.rb.AddForce(this.rb.transform.up * jumpPower, ForceMode.Impulse);
 		}
 	}
 }
