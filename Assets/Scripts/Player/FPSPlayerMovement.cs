@@ -5,7 +5,7 @@ public class FPSPlayerMovement : MonoBehaviour
 {
 	private float moveSpeed = 10.0f;
 
-	public float maxMoveSpeed = 100.0f;
+	private float maxMoveSpeed = 100.0f;
 
 	private float jumpPower = 5.0f;
 
@@ -14,6 +14,8 @@ public class FPSPlayerMovement : MonoBehaviour
 	private InputAction moveAction;
 
 	private InputAction jumpAction;
+
+	private Animator _animator;
 
     private bool IsGrounded()
     {
@@ -43,11 +45,15 @@ public class FPSPlayerMovement : MonoBehaviour
     private void Awake()
 	{
 		this.rb = GetComponent<Rigidbody>();
+		this._animator = GetComponent<Animator>();
 		this.moveAction = InputSystem.actions.FindAction("Move");
 		this.jumpAction = InputSystem.actions.FindAction("Jump");
 
 		this.jumpAction.performed += ievent => Jump();
-    }
+
+		this.moveAction.performed += ievent => this._animator.SetBool("IsMove", true);
+		this.moveAction.canceled += ievent => this._animator.SetBool("IsMove", false);
+	}
 
 	private void FixedUpdate()
 	{
@@ -62,7 +68,7 @@ public class FPSPlayerMovement : MonoBehaviour
 		{
 			if (moveAction.IsPressed())
 			{
-                Vector2 input = moveAction.ReadValue<Vector2>();
+				Vector2 input = moveAction.ReadValue<Vector2>();
                 Vector3 direction = transform.forward * input.y + transform.right * input.x;
                 
 				rb.AddForce(direction.normalized * moveSpeed, ForceMode.Acceleration);
