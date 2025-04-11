@@ -232,8 +232,8 @@ GameObject:
   - component: {fileID: 767657439}
   - component: {fileID: 767657438}
   - component: {fileID: 767657437}
-  - component: {fileID: 767657440}
   - component: {fileID: 767657441}
+  - component: {fileID: 767657440}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -250,7 +250,7 @@ Transform:
   m_GameObject: {fileID: 767657435}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.293, y: 0.175, z: 0.63}
+  m_LocalPosition: {x: -0.293, y: 0.175, z: 0.574}
   m_LocalScale: {x: 1, y: 0.060237, z: 0.11351752}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -367,7 +367,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!4 &1126811569 stripped
 Transform:
@@ -562,33 +562,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1794288977 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3956537509616546555, guid: f592cd432c3369c48906231e6a06d693, type: 3}
-  m_PrefabInstance: {fileID: 5409124299637016562}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1794288984
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1794288977}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: c1c17260eb3f0bf44a279e8fc691afff, type: 3}
-  m_Controller: {fileID: 9100000, guid: 4dcf78db06b3bfd4fa0de5bb86b6fc69, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 1
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2018237401
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,10 +726,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3956537509616546555, guid: f592cd432c3369c48906231e6a06d693, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1794288984}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f592cd432c3369c48906231e6a06d693, type: 3}
 --- !u!1001 &6712939101131159167
 PrefabInstance:

@@ -9,17 +9,16 @@ public class AttackScript : MonoBehaviour
 		this._damage = 10.0f;
 	}
 
-	private void OnCollisionStay(Collision collisionInfo)
+	private void OnCollisionEnter(Collision collisionInfo)
 	{
-		Debug.Log("YES!");
-		//if (other.CompareTag("Player"))
-		//{
-		//	HPSystem playerHealth = other.GetComponent<HPSystem>();
+		if (collisionInfo.collider.CompareTag("Player"))
+		{
+			HPSystem playerHealth = collisionInfo.collider.GetComponent<HPSystem>();
 
-		//	if (playerHealth != null)
-		//	{
-		//		playerHealth.GetDamage(this._damage);
-		//	}
-		//}
+			if (playerHealth != null)
+			{
+				playerHealth.GetDamage(this._damage);
+			}
+		}
 	}
 }
